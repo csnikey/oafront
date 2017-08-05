@@ -76,11 +76,19 @@ export default [
           }
         },
         {
-          path: 'addplan',
-          name: 'addplan',
-          component: viewLoader('AddPlan'),
+          path: 'adddayplan',
+          name: 'adddayplan',
+          component: viewLoader('AddDayPlan'),
           meta: {
-            title: '添加计划'
+            title: '添加日计划'
+          }
+        },
+         {
+          path: 'addweekplan',
+          name: 'addweekplan',
+          component: viewLoader('AddWeekPlan'),
+          meta: {
+            title: '添加周计划'
           }
         },
         {

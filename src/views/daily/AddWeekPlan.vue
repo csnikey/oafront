@@ -47,7 +47,7 @@
 // import tableData3 from '@/data/dayplanlist'
 import { VueEditor } from 'vue2-editor'
   export default {
-    name:'AddPlan',
+    name:'AddWeekPlan',
     data() {
       return {
           content:'',
@@ -55,8 +55,8 @@ import { VueEditor } from 'vue2-editor'
           value: '一般',
           label: '一般'
         }, {
-          value: '其他',
-          label: '其他'
+          value: '紧急',
+          label: '紧急'
         }],
           form: {
           name: '',
