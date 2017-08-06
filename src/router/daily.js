@@ -46,7 +46,7 @@ export default [
           name: 'dailyout',
           component: viewLoader('DailyOutManage'),
           meta: {
-            title: '请假',
+            title: '出差',
             level: 2
           },
 
