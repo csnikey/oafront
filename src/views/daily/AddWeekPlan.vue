@@ -9,16 +9,15 @@
     <div class="block m-addplan"> 
 
     
-  <el-form ref="form" :model="form" label-width="80px" >
-    <el-form-item label="填写人">
-      <el-input v-model="form.person" :disabled="true"></el-input>
+  <el-form ref="form" label-width="80px" :model="formInline" :inline="true">
+    <el-form-item label="填写人:"  >
+      {{form.person}}
     </el-form-item>
-    <el-form-item label="填写时间">
-      <el-input v-model="form.time" :disabled="true"></el-input>
+ <el-form-item label="填写时间:"  >
+      {{form.time}}
     </el-form-item>
-
-   
-<br>
+   </el-form>
+<el-form ref="form" label-width="80px" >
   <el-form-item label="紧急程度">
     <el-select v-model="form.region" placeholder="请选择紧急程度" disabled >
       <el-option
@@ -30,7 +29,7 @@
     </el-select>
   </el-form-item>
 <br>
-  <el-form-item label="标题" class="block">
+  <el-form-item label="标题" class="block" >
     <el-input v-model="form.name"></el-input>
   </el-form-item>
   <el-form-item label="正文" class="block">
@@ -47,7 +46,7 @@
 // import tableData3 from '@/data/dayplanlist'
 import { VueEditor } from 'vue2-editor'
   export default {
-    name:'AddWeekPlan',
+    name:'AddDayPlan',
     data() {
       return {
           content:'',

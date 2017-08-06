@@ -23,7 +23,7 @@
   </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit" style="margin-left:40px">查询</el-button>
-      <router-link :to="'addplan'" style="margin-left:40px"><el-button type="primary">新增</el-button></router-link>
+      <router-link :to="'adddayplan'" style="margin-left:40px"><el-button type="primary">新增</el-button></router-link>
     </el-form-item>
   </el-form>
 <!--表格数据-->
