@@ -7,18 +7,17 @@
    </div>
 
     <div class="block m-addplan"> 
-
+  <el-form ref="form" label-width="80px" class="" v-model="form" :inline="true">
+    <el-form-item label="填写人:"  >
+      {{form.person}}
+    </el-form-item>
+ <el-form-item label="填写时间:"  >
+      {{form.time}}
+    </el-form-item>
+   </el-form>  
     
   <el-form ref="form" :model="form" label-width="80px" >
-    <el-form-item label="填写人">
-      <el-input v-model="form.person" :disabled="true"></el-input>
-    </el-form-item>
-    <el-form-item label="填写时间">
-      <el-input v-model="form.time" :disabled="true"></el-input>
-    </el-form-item>
 
-   
-<br>
   <el-form-item label="紧急程度">
     <el-select v-model="form.region" placeholder="请选择紧急程度" disabled >
       <el-option

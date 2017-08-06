@@ -41,6 +41,46 @@ export default [
           },
 
         },
+          {
+          path: 'adddailyleave',
+          name: 'adddailyleave',
+          component: viewLoader('AddDailyLeave'),
+          meta: {
+            title: '新增请假',
+            level: 2
+          },
+
+        },
+        {
+          path: 'destroydailyleave',
+          name: 'destroydailyleave',
+          component: viewLoader('DestroyDailyLeave'),
+          meta: {
+            title: '销假',
+            level: 2
+          },
+
+        },
+        {
+          path: 'infodailyleave',
+          name: 'infodailyleave',
+          component: viewLoader('InfoDailyLeave'),
+          meta: {
+            title: '请假详情',
+            level: 2
+          },
+
+        },
+         {
+          path: 'checkdailyleave',
+          name: 'checkdailyleave',
+          component: viewLoader('CheckDailyLeave'),
+          meta: {
+            title: '审批请假',
+            level: 2
+          },
+
+        },
         {
           path: 'dailyout',
           name: 'dailyout',
@@ -89,6 +129,14 @@ export default [
           component: viewLoader('AddWeekPlan'),
           meta: {
             title: '添加周计划'
+          }
+        },
+        {
+          path: 'addmonthplan',
+          name: 'addmonthplan',
+          component: viewLoader('AddMonthPlan'),
+          meta: {
+            title: '添加月计划'
           }
         },
         {

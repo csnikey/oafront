@@ -29,7 +29,7 @@
     </el-select>
   </el-form-item>
 <div class="el-formli-self">
-<label class="el-label">*弘文周</label>
+<label class="el-label">*月</label>
 
   <el-select v-model="form.term" placeholder="学年">
     <el-option
@@ -41,7 +41,7 @@
   </el-select>
 
 
-  <el-select v-model="form.targetweek" placeholder="洪文周">
+  <el-select v-model="form.targetweek" placeholder="洪文月">
     <el-option
       v-for="item in weeks"
       :key="item.value"
@@ -85,7 +85,7 @@
     </el-table>
 </div>
 <div class="el-formli-self">
-<label class="el-label">本周情况:</label>
+<label class="el-label">本月情况:</label>
    <el-table
       :data="yearData"
       >
@@ -96,69 +96,69 @@
       </el-table-column>
       <el-table-column
         prop="name"
-        label="本周个人目标"
+        label="本月个人目标"
        >
       </el-table-column>
       <el-table-column
         prop="address"
-        label="本周个人实际完成情况" >
+        label="本月个人实际完成情况" >
       </el-table-column>
        <el-table-column
         prop="address"
-        label="本周个人完成比">
+        label="本月个人完成比">
       </el-table-column>
        <el-table-column
         prop="address"
-        label="本周团队目标" >
+        label="本月团队目标" >
       </el-table-column>
        <el-table-column
         prop="address"
-        label="本周团队实际完成情况">
+        label="本月团队实际完成情况">
       </el-table-column>
        <el-table-column
         prop="address"
-        label="本周团队完成比" >
+        label="本月团队完成比" >
       </el-table-column>
     </el-table>
 </div>
 
-  <el-form-item label="*本周总结分析">
+  <el-form-item label="*本月总结分析">
     <el-input type="textarea" v-model="form.summary"  placeholder="数据分析，市场分析，团队管理，本周亮点与不足"></el-input>
   </el-form-item>
 
 
   <hr>
-  <h2>下周计划</h2><br>
+  <h2>下月计划</h2><br>
   <h3>个人</h3>
     <div class="el-formli-self2">
       <label class="el-label">收款额（元）:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">签单数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">操作数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">铺垫数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">维护数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
        
   </div>
 
   <h3>团队</h3>
     <div class="el-formli-self2">
       <label class="el-label">收款额（元）:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">签单数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">操作数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">铺垫数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
         <label class="el-label">维护数:</label>
-      <el-input v-model="trems" placeholder="请输入内容"></el-input>
+      <el-input v-model="terms" placeholder="请输入内容"></el-input>
        
   </div>
-  <el-form-item label="*下周工作思路" label-width="80px">
+  <el-form-item label="*下月工作思路" label-width="80px">
     <el-input type="textarea" v-model="form.summary"  placeholder="数据分析，市场分析，团队管理，本周亮点与不足"></el-input>
   </el-form-item>
 
