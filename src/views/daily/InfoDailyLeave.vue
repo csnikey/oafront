@@ -85,12 +85,38 @@
       <div class="common-wrap">
 
          <el-steps :space="100" :active="3" finish-status="success">
-           <el-step title="步骤 1"></el-step>
-  <el-step title="步骤 2"></el-step>
-  <el-step title="步骤 3"></el-step>
+           <el-step title="何申请"></el-step>
+  <el-step title="组长审批"></el-step>
+  <el-step title="中队长"></el-step>
+  <el-step title="大队长"></el-step>
+  <el-step title="hr总监"></el-step>
 </el-steps>
+<el-table
+    :data="tableData"
+    border
+    style="width: 100%;margin-top:20px">
+    <el-table-column
+      prop="date"
+      label="节点"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="状态"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="备注">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="时间">
+    </el-table-column>
+  </el-table>
       </div>
 
+      
  </div>
 
 </div>
@@ -176,7 +202,7 @@ padding:20px 10px;
 
 
 .common-wrap{
-  padding-left:120px;
+  padding-left:60px;
   padding-top:20px;
 }
 

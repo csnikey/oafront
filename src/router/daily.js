@@ -41,6 +41,16 @@ export default [
           },
 
         },
+         {
+          path: 'dailyout',
+          name: 'dailyout',
+          component: viewLoader('DailyOutManage'),
+          meta: {
+            title: '请假',
+            level: 2
+          },
+
+        },
           {
           path: 'adddailyleave',
           name: 'adddailyleave',

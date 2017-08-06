@@ -158,7 +158,7 @@
       <el-input v-model="trems" placeholder="请输入内容"></el-input>
        
   </div>
-  <el-form-item label="*下周工作思路" label-width="80px">
+  <el-form-item label="*下周工作思路" label-width="120px">
     <el-input type="textarea" v-model="form.summary"  placeholder="数据分析，市场分析，团队管理，本周亮点与不足"></el-input>
   </el-form-item>
 
@@ -244,9 +244,10 @@ VueEditor
     }
   }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .el-formli-self2{
    margin: 15px 0;
+   padding-left:20px;
   .el-input{
     width:100px;
     margin-right:10px;

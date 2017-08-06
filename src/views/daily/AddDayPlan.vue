@@ -87,7 +87,7 @@ VueEditor
     }
   }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .c-common-wrap{
   padding:10px;
 }
