@@ -1,6 +1,6 @@
 const Container = resolve => require(['@/views/Container'], resolve)
 const Launch = resolve => require(['@/views/Launch'], resolve)
-const Profile = resolve => require(['@/views/client/profile'], resolve)
+const Profiles = resolve => require(['@/views/client/Profiles'], resolve)
 
 const scope = 'client'
 
@@ -36,7 +36,7 @@ export default [
           {
             path: 'profile',
             name: 'profile',
-            component: Profile,
+            component: Profiles,
             meta: {
               title: '学校档案管理',
               level: 2

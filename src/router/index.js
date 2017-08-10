@@ -4,12 +4,12 @@ import system from '@/router/system' //系统管理
 import client from '@/router/client' // 客户管理
 import NotFound from '@/views/NotFound' //404
 import daily from '@/router/daily'
-import promange from '@/router/promange'
+import promanage from '@/router/promanage'
 
 Vue.use(Router)
 
 let routes = ([])
-	.concat(system).concat(daily).concat(promange)
+	.concat(system).concat(daily).concat(promanage)
 	.concat(client)
 
 // 递归精简路由，剔除component

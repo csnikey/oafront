@@ -104,7 +104,7 @@ export default {
       return {
         name: destiny
       }
-    },    
+    },
     ...mapActions(['switchSystem']),
     ...mapMutations(['setSystem'])
   },
@@ -115,6 +115,23 @@ export default {
     // .catch(e => {
     //   console.log(e)
     // })
+
+    this.$api.getUserinfo().then(
+           res=>{
+             let userJson=res.data.data
+             let user={
+                   realname:userJson.realname,
+                   staff_id:userJson.staff_id
+             }
+             localStorage.setItem("realname",userJson.realname)
+             localStorage.setItem("staff_id",userJson.staff_id)
+            //  this.$store.state.user.commit('updateUser',user)
+           }
+
+
+    )
+
+
     this.$fetch.post('/system/passport/signinforajax', {
       username: 'god',
       password: 'mst112233'
@@ -127,6 +144,7 @@ export default {
       });
     })
 
+    // this.initMenu()
   },
   computed: {
     ...mapState({
@@ -143,81 +161,71 @@ export default {
 </script>
 
 <style lang="scss">
-  .layout__sidebar {
-    position: absolute;
-    width: 200px;
-    position: fixed;
-    width: 210px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    background-color: #324157;
-    .el-menu-item {
-      padding: 0 15px;
-      height: 46px;
-      line-height: 46px;
-      padding: 0 17px;
-      height: 50px;
-      line-height: 50px;
-      color: #fff;
-    };
-    .el-menu-item.is-active {
-      background-color: rgba(29,144,230, .7);
-      color: #fff ;     
-      background-color: rgba(29,144,230, .8);
-      color: #fff
-    }
-    .el-menu--dark .el-submenu .el-menu-item:hover {
-      background-color: rgba(29,144,230, .9);
-    }    
-  }
-  .layout__container {
-    margin-left: 210px;
-    padding-top:60px;
-  }
-  .layout__sidebar_logo {
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    font-size: 22px;
-    font-weight: bold;
+.layout__sidebar {
+  position: fixed;
+  width: 210px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  background-color: #324157;
+  .el-menu-item {
+    padding: 0 17px;
+    height: 50px;
+    line-height: 50px;
     color: #fff;
-    background-color: #4b5c75
+  };
+  .el-menu-item.is-active {
+    background-color: rgba(29,144,230, .8);
+    color: #fff
   }
-  .layout__container_nav {
-    box-shadow: 0 1px 1px 1px rgba(0,0,0, .2);
-    .el-menu-item {
-      font-size: 16px;
-      padding: 0 25px;
-    }
-    position: fixed;
-    top:0;
-    width: 100%;
-    z-index: 99
+  .el-menu--dark .el-submenu .el-menu-item:hover {
+    background-color: rgba(29,144,230, .9);
+  }    
+}
+.layout__container {
+  margin-left: 210px;
+}
+.layout__sidebar_logo {
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+.layout__container_nav {
+  box-shadow: 0 1px 1px 1px rgba(0,0,0, .2);
+  .el-menu-item {
+    font-size: 16px;
+    padding: 0 25px;
   }
-  .layout__container_nav .el-menu-item.is-active {
-    background-color: #1d90e6;
-    color: #fff;
-    font-weight: bold;
-  }
-  .el-menu--horizontal>.el-menu-item:hover {
-    border-color: #1d90e6
-  }
-  .el-menu-item-group__title {
-  .el-menu--dark .el-submenu__title {
-    background-color: rgba(0,0,0, .1);
-    padding-bottom: 15px;
-    // box-shadow: 0 1px 2px 0px rgba(0,0,0, .3);
-    font-weight: bold;
-    color: #fff;
-    font-size: 14px
-  }
-  .layout__container_content {
-    padding: 15px;
-    padding-top: 75px;
-  }
-  .el-menu--dark .el-submenu .el-menu {
-    background-color: #324157;
-  }}  
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+.layout__container_nav .el-menu-item.is-active {
+  background-color: #dee1e4;
+  color: #48576a;
+  font-weight: bold;
+  border-bottom-color: #48576a;
+}
+.el-menu--horizontal>.el-menu-item:hover {
+  border-bottom-color: #48576a;
+}
+.el-menu--dark .el-submenu__title {
+  background-color: rgba(0,0,0, .1);
+  padding-bottom: 15px;
+  // box-shadow: 0 1px 2px 0px rgba(0,0,0, .3);
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px
+}
+.layout__container_content {
+  padding: 15px;
+  padding-top: 75px;
+}
+.el-menu--dark .el-submenu .el-menu {
+  background-color: #324157;
+}
 </style>

@@ -12,6 +12,7 @@
 
         </el-cascader>
       </el-form-item>
+  
       <el-form-item label="填写日期">
         <el-col :span="11">
           <el-date-picker type="datetime" placeholder="选择日期时间" v-model="form.start_time" style="width: 100%;" :clearable="clearable"></el-date-picker>
@@ -43,15 +44,14 @@
       </el-table-column>
       <el-table-column prop="approver" label="审批人" show-overflow-tooltip>
       </el-table-column>
-        <el-table-column prop="approve_time" label="审批时间" show-overflow-tooltip>
-      </el-table-column>
       <el-table-column fixed="right" label="操作" width="120px" prop="can_edit">
   
         <template scope="scope">
               
-          <el-button  v-if="scope.row.can_edit==1" type="text" size="small" @click="change(scope.row.id)">修改</el-button>
-          <router-link :to="'infoplan/'+scope.row.id"><el-button type="text" size="small" >查看</el-button></router-link>
-          <el-button  v-if="scope.row.can_delete==1" type="text" size="small" @click="deleteplan(scope.$index, tableData3,scope.row.id)">删除</el-button>
+          <el-button  v-if="scope.row.can_edit==1" type="text" size="small" @click="change(scope.row.id)">{{scope.row.can_edit}}修改</el-button>
+          <el-button type="text" size="small" @click="info(scope.row.id)">查看</el-button>
+          <el-button  v-if='scope.row.can_delete==1' type="text" size="small"
+           @click="delete(scope.$index, tableData3,scope.row.id)">删除</el-button>
           <el-button  v-if="scope.row.can_approve==1" type="text" size="small" @click="check(scope.row.id)">审批</el-button>
         </template>
       </el-table-column>
@@ -73,7 +73,7 @@ export default {
     // 初始获取部门信息
 
     this.getApiData({
-      type: 1,
+      type: this.type,
       per_page: this.per_page,
       page:this.currentpage
 
@@ -83,7 +83,7 @@ export default {
   },
   data() {
     return {
-
+      type:3,
       multipleSelection: [],
       tableData3: [],
       per_page: 10,
@@ -128,52 +128,21 @@ export default {
 
     },
     curChange(pageno){
-      this.currentpage=pageno
        let params = {
-         type:1,
-        per_page:this.per_page,
-        name:this.form.name,
-        department_id:this.form.selectedDepart,
-        start_time:this.form.start_time,
-        end_time:this.form.end_time,
+        type: this.type,
+        per_page: this.per_page,
         page:pageno
       }
       this.getApiData(params);
 
     },
-    // 删除计划
-    deleteplan( index,tableData3,id) {
-      this.$confirm('删除后将不可恢复，确认要删除吗？', '删除提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        console.log(id);
-        this.$api.post('/daily/plan/delete', {
-               id:id
-        }).then(
-          res => {
-            if (res.error == 0) {
-               this.$message({
-                message: '删除计划成功',
-                type: 'success'
-              });
-               tableData3.splice(index, 1);
-               this.tableData3=tableData3;
-              //删除之后 刷新列表
-            // this.onSubmit()
-            }else{
-               this.$message({
-                message: res.data,
-                type: 'warning'
-              });
-            }
-          })
-      })
-    
+    delete(index,rows,id){
     },
       change(id){
         
+    },
+      info(id){
+      
     },
       check(id){
       
@@ -199,7 +168,7 @@ export default {
     },
     getdata() {
       let params = {
-        type: 1,
+        type: this.type,
         per_page: this.pagesize,
         currentpage: this.currentpage,
       }
@@ -208,7 +177,7 @@ export default {
     //查询数据
     onSubmit() {
       var params={
-        type:1,
+        type:this.type,
         per_page:this.per_page,
         page:1,
         name:this.form.name,
@@ -219,6 +188,10 @@ export default {
       }
       this.getApiData(params)
 
+    },
+    // 删除行
+    deleteRow(index, rows) {
+      rows.splice(index, 1);
     },
     // 切换选择
     toggleSelection(rows) {

@@ -1,8 +1,17 @@
+const scope = 'system'
+const viewLoader = function (name) {
+  return (resolve) => require([`@/views/${scope}/${name}`], resolve)
+}
+
 const Container = resolve => require(['@/views/Container'], resolve)
 const Launch = resolve => require(['@/views/Launch'], resolve)
-const viewLoader = (name) => (resolve) => require([`@/views/system/${name}`], resolve)
-
-const scope = 'system'
+const Groups = resolve => require(['@/views/system/Groups'], resolve)
+const GroupsEdit = resolve => require(['@/views/system/GroupsEdit'], resolve)
+const Rules = resolve => require(['@/views/system/Rules'], resolve)
+const RulesEdit = resolve => require(['@/views/system/RulesEdit'], resolve)
+const Settings = resolve => require(['@/views/system/Settings'], resolve)
+const Logs = resolve => require(['@/views/system/Logs'], resolve)
+const Admins = resolve => require(['@/views/system/Admins'], resolve)
 
 export default [
   {
@@ -35,14 +44,122 @@ export default [
         },
         children: [
           {
-            path: 'account',
-            name: 'account',
-            component:viewLoader('AccountManage') ,
+            path: 'settings',
+            name: 'permission_settings',
+            component: Settings,
             meta: {
-              title: '账号管理',
+              title: '个人设置',
               level: 2
             }
-          }        
+          },
+          {
+            path: 'groups',
+            name: 'permission_groups',
+            component: Groups,
+            meta: {
+              title: '管理组列表',
+              level: 2
+            }
+          },
+          {
+            path: 'groups_edit',
+            name: 'permission_groups_edit',
+            component: GroupsEdit,
+            meta: {
+              title: '组权限设置',
+              level: 2
+            }
+          },                
+          {
+            path: 'rules',
+            name: 'permission_rules',
+            component: Rules,
+            meta: {
+              title: '权限点列表',
+              level: 2
+            }
+          },
+          {
+            path: 'rules_edit',
+            name: 'permission_rules_edit',
+            component: RulesEdit,
+            meta: {
+              title: '编辑权限点',
+              level: 2
+            }
+          },
+          {
+            path: 'logs',
+            name: 'permission_logs',
+            component: Logs,
+            meta: {
+              title: '全局操作日志',
+              level: 2
+            }            
+          },
+          {
+            path: 'admins',
+            name: 'permission_admins',
+            component: Admins,
+            meta: {
+              title: '管理员列表',
+              level: 2
+            }            
+          }                                                
+          // {
+          //   path: 'groups',
+          //   name: 'permission_groups',
+          //   component: Groups,
+          //   meta: {
+          //     title: '管理组列表',
+          //     level: 2
+          //   }
+          // },
+          // {
+          //   path: 'groups_add',
+          //   name: 'permission_groups_add',
+          //   component: GroupsAdd,
+          //   meta: {
+          //     title: '新增管理组',
+          //     level: 2
+          //   }
+          // },
+          // {
+          //   path: 'groups_edit',
+          //   name: 'permission_groups_edit',
+          //   component: GroupsEdit,
+          //   meta: {
+          //     title: '组权限设置',
+          //     level: 2
+          //   }
+          // },                
+          // {
+          //   path: 'rules',
+          //   name: 'permission_rules',
+          //   component: Rules,
+          //   meta: {
+          //     title: '管理组列表',
+          //     level: 2
+          //   }
+          // },
+          // {
+          //   path: 'rules_add',
+          //   name: 'permission_rules_add',
+          //   component: RulesAdd,
+          //   meta: {
+          //     title: '新增权限点',
+          //     level: 2
+          //   }
+          // },
+          // {
+          //   path: 'logs',
+          //   name: 'permission_logs',
+          //   component: Logs,
+          //   meta: {
+          //     title: '全局操作日志',
+          //     level: 2
+          //   }            
+          // }                                        
         ]
       },
       {
@@ -65,162 +182,89 @@ export default [
             }
 
            },
-             {
-            path: 'employ',
-            name: 'employ',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '人员管理',
-              level: 2
-            }
+          //    {
+          //   path: 'employ',
+          //   name: 'employ',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '人员管理',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'duty',
-            name: 'duty',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '职能管理',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'duty',
+          //   name: 'duty',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '职能管理',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'product',
-            name: 'product',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '产品管理',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'product',
+          //   name: 'product',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '产品管理',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'cardtype',
-            name: 'cardtype',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '卡种类',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'cardtype',
+          //   name: 'cardtype',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '卡种类',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'term',
-            name: 'term',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '学年学期',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'term',
+          //   name: 'term',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '学年学期',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'gift',
-            name: 'gift',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '礼品',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'gift',
+          //   name: 'gift',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '礼品',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'deliver',
-            name: 'deliver',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '物流快递',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'deliver',
+          //   name: 'deliver',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '物流快递',
+          //     level: 2
+          //   }
 
-           },
-             {
-            path: 'attence',
-            name: 'attence',
-            component: viewLoader('AccountManage') ,
-            meta: {
-              title: '考勤类别',
-              level: 2
-            }
+          //  },
+          //    {
+          //   path: 'attence',
+          //   name: 'attence',
+          //   component: viewLoader('Groups') ,
+          //   meta: {
+          //     title: '考勤类别',
+          //     level: 2
+          //   }
 
-           },
-
-
-
+          //  },
 
         ]
       }      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

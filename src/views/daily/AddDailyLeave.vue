@@ -2,7 +2,7 @@
 	<div class='c-common-wrap'>
    <!--查询部分-->
    <div class="block"> 
-     <router-link :to='"dayplan"'><el-button type="primary">返回</el-button></router-link>
+     <router-link :to='"dailyleave"'><el-button type="primary">返回</el-button></router-link>
    <el-button type="primary" @click="save">保存</el-button>
    </div>
 
@@ -11,38 +11,33 @@
     
   <el-form ref="form" label-width="120px"  :inline="true">
     <el-form-item label="填写人:"  >
-      {{form.person}}
+      {{form.realname}}
     </el-form-item>
  <el-form-item label="申请时间:"  >
-      {{form.time}}
+      {{form.create_time}}
     </el-form-item>
    </el-form>
 <el-form ref="form" label-width="120px" >
- <el-form-item label="*请假类型:">
-    <el-select v-model="form.region" placeholder="请假类型"  >
-      <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="*紧急程度:">
-    <el-select v-model="form.region" placeholder="请选择紧急程度" disabled >
-      <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-    </el-select>
-  </el-form-item>
+    <el-form-item label="*请假类型">
+        <el-select v-model="form.attendance_id" placeholder="请假类型" >
+            <el-option v-for="item in leave_type_list"
+                       :key="item.id"
+                       :label="item.attendance_name"
+                       :value="item.id">
+            </el-option>
+        </el-select>
+    </el-form-item>
+    <el-form-item label="*紧急程度">
+        <el-select v-model="form.emer_status" placeholder="紧急程度">
+            <el-option label="一般" value="1"></el-option>
+            <el-option label="紧急" value="2"></el-option>
+        </el-select>
+    </el-form-item>
     <div class="el-formli-self">
 <label class="el-label">*请假时间</label>
 
   <el-date-picker
-      v-model="value1"
+      v-model="form.start_time"
       type="datetime"
       placeholder="开始日期"
       :picker-options="pickerOptions0">
@@ -50,7 +45,7 @@
 
 
   <el-date-picker
-      v-model="value1"
+      v-model="form.end_time"
       type="datetime"
       placeholder="结束日期"
       :picker-options="pickerOptions0">
@@ -60,14 +55,14 @@
 
   <div class="el-formli-self">
     <label class="el-label">*请假天数</label>
-    <el-input-number v-model="days" :step="0.5" :min='min'></el-input-number>&nbsp;&nbsp;(0.5天为单位)
+    <el-input-number v-model="form.leave_days" :step="0.5" :min='min'></el-input-number>&nbsp;&nbsp;(0.5天为单位)
  
 </div>
 <div class="el-formli-self">
     <label class="el-label">*申请描述</label>
    
     
-    <el-input type="textarea" ></el-input>
+    <el-input type="textarea" v-model="form.content"></el-input>
  
 </div>
 </el-form>
@@ -83,54 +78,104 @@
 <script>
 // import tableData3 from '@/data/dayplanlist'
 import { VueEditor } from 'vue2-editor'
-  export default {
+import common from '@/util/common'
+export default {
     name:'AddDailyLeave',
-    data() {
-      return {
-        days:'0',
-        min:0,
-        pickerOptions0: {
-          disabledDate(time) {
-            return time.getTime() < Date.now() - 8.64e7;
-          }
-        },
-          content:'',
-          options:[{
-          value: '一般',
-          label: '一般'
-        }, {
-          value: '紧急',
-          label: '紧急'
-        }],
-          form: {
-          name: '',
-          person:'zhangsna',
-          time:'2017/7/1 14:28',
-          region: '一般',
-          date1: '',
-          desc:'',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+    created(){
+        if(typeof this.$route.params.id != undefined)
+            this.form.id   = this.$route.params.id;
+    },
+    mounted() {
+        this.$api.getUserinfo().then(res => {
+            var resData = res.data;
+            if(resData.error == 0){
+                this.form.realname = resData.data.realname;
+            }
+        });
+        this.getLeaveType();
+        if(this.form.id) {
+            this.getLeaveInfo({id:this.form.id});
         }
-    
-      }
+    },
+    data() {
+        return {
+            days:'0',
+            min:0,
+            pickerOptions0: {
+                disabledDate(time) {
+                    return time.getTime() < Date.now() - 8.64e7;
+                }
+            },
+            content:'',
+            form: {
+                realname: '',
+                create_time:common.getNowDate(),
+                emer_status: '1',
+                start_time: '',
+                end_time:'',
+                leave_days:'',
+                content:'',
+                attendance_id: '',
+                id:''
+            },
+            leave_type_list:[]
+
+        }
     },
     components:{
-VueEditor
+        VueEditor
     },
     methods: {
-      // 保存信息
-     save(){
+        // 保存信息
+        save(){
+            this.$api.post('/daily/leave/save', this.form).then(res => {
+                if(res.error == 0) {
+                    this.$message({
+                        message: '保存成功，3s后返回请假列表',
+                        type: 'success'
+                    });
+                    setTimeout(() =>{
+                        this.$router.push({ name: `dailyleave` })
+                    }, 3000);
+                } else {
+                    this.$message({
+                        message: res.msg,
+                        type: 'warning'
+                    });
+                }
+            })
+        },
+        getLeaveType(){
+            this.$api.get('/daily/leave/gettype').then(res => {
+                if(res.error == 0) {
+                    this.leave_type_list = res.data;
+                } else {
+                    this.$message({
+                        message: res.msg,
+                        type: 'warning'
+                    });
+                }
+            })
+        },
+        getLeaveInfo(params) {
+            this.$api.get('/daily/leave/get', params).then(res => {
+                if(res.error == 0) {
+                    var info = res.data.info;
+                    for(var key in this.form) {
+                        if(key == 'realname') continue;
+                        this.form[key] = info[key];
+                    }
 
-     },
-     onSubmit() {
-        console.log('submit!');
-      }
+                } else {
+                    this.$message({
+                        message: res.msg,
+                        type: 'warning'
+                    });
+                }
+            })
+        }
     }
-  }
+}
 </script>
 <style lang="scss" scoped>
 .el-formli-self{

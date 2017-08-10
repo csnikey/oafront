@@ -2,22 +2,23 @@
 	<div class='c-common-wrap'>
    <!--查询部分-->
    <div class="block"> 
-     <router-link :to='"../dayplan"'><el-button type="primary">返回</el-button></router-link>
+     <router-link :to='"dayplan"'><el-button type="primary">返回</el-button></router-link>
    <el-button type="primary" @click="save">保存</el-button>
    </div>
 
     <div class="block m-addplan"> 
-  <el-form ref="form" label-width="80px" class="" v-model="form" :inline="true">
-    <el-form-item label="填写人:"  >
-      {{form.person}}
-    </el-form-item>
- <el-form-item label="填写时间:"  >
-      {{form.time}}
-    </el-form-item>
-   </el-form>  
+
     
   <el-form ref="form" :model="form" label-width="80px" >
+    <el-form-item label="填写人">
+      <el-input v-model="form.person" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="填写时间">
+      <el-input v-model="form.time" :disabled="true"></el-input>
+    </el-form-item>
 
+   
+<br>
   <el-form-item label="紧急程度">
     <el-select v-model="form.region" placeholder="请选择紧急程度" disabled >
       <el-option
@@ -30,49 +31,26 @@
   </el-form-item>
 <br>
   <el-form-item label="标题" class="block">
-    <el-input v-model="form.name" :disabled="true"></el-input>
+    <el-input v-model="form.name"></el-input>
   </el-form-item>
   <el-form-item label="正文" class="block">
-   <vue-editor v-model="content" :disabled="true"></vue-editor>
+   <vue-editor v-model="content"></vue-editor>
   </el-form-item>
 </el-form>
 
  
     </div>
    
-<!--审批状态-->
-    <div class="block m-addplan">
-      <div style="padding-left:35px">审批状态：已审批 &nbsp;&nbsp;&nbsp;审批时间：  2017/7/1 14:28</div>
-      <br>
-      <el-form  ref="ruleForm" label-width="100px" class="demo-ruleForm">
- 
-      <el-form-item label="*审批" prop="desc">
-        <el-input type="textarea" v-model="checkdesc" :disabled='true'>{{checkdesc}}</el-input>
-      </el-form-item>
-
-</el-form>
-
-
-    </div>
-
-
-</div>
+  </div>
 </template>
 <script>
 // import tableData3 from '@/data/dayplanlist'
 import { VueEditor } from 'vue2-editor'
   export default {
-    name:'InfoPlan',
-    created(){
-       this.id=this.$route.params.id
-    },
-    mounted(){
-     this.getPlanInfo()
-    },
-  
+    name:'AddPlan',
     data() {
       return {
-          content:'ascasc',
+          content:'',
           options:[{
           value: '一般',
           label: '一般'
@@ -80,21 +58,18 @@ import { VueEditor } from 'vue2-editor'
           value: '其他',
           label: '其他'
         }],
-        checkdesc:'',
-        id:1,
           form: {
           name: '',
           person:'zhangsna',
           time:'2017/7/1 14:28',
           region: '一般',
           date1: '',
-          desc:'wevwv',
+          desc:'',
           date2: '',
           delivery: false,
           type: [],
           resource: '',
-          desc: '',
-          checkdesc:'ssav'
+          desc: ''
         }
     
       }
@@ -103,30 +78,6 @@ import { VueEditor } from 'vue2-editor'
 VueEditor
     },
     methods: {
-      // 获取plan的信息 根据id
-
-      getPlanInfo(){
-      let params={
-        id:this.id
-      }
-          this.$api.getPlanInfo(params).then(
-            res=>{
-              if(res.error==0){
-
-              }else{
-                this.$message({
-                  message:res.msg,
-                  type:"warning"
-                })
-              }
-              
-
-
-            }
-          )
-      },
-
-
       // 保存信息
      save(){
 

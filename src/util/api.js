@@ -1,94 +1,78 @@
-import 'whatwg-fetch'
-import Vue from 'vue'
+import axios from 'axios'
 import qs from 'qs'
-const prefix = process.env.NODE_ENV == 'production'
-  ? ''
-  : '/api'
-
+const preurl = '/api'
+const oaurl = 'http://oa.kaikela.dev/'
 export default {
-  get (url, query) {
-    // Vue.prototype.$Progress.start()
-    return fetch(queryParser(prefix+url, query), config._get)
-      .then(checkStatus)
-      .then(checkSuccess)
+  // 获取计划信息
+  getPlanInfo(params) {
+    return axios.get(`${preurl}/daily/plan/get`).then(d => d.data)
   },
-  post (url, body, service_name) {
-    // Vue.prototype.$Progress.start()
-    return fetch(prefix+url, config._post(body))
-      .then(checkStatus)
-      .then(checkSuccess)
-  } 
-}
-
-const config = {
-  _get: {
-    credentials: 'include'
+  // 获取用户信息
+  getUserinfo() {
+    return axios.get(`${preurl}/daily/plan/getuserinfo`)
   },
-  _post (body) {
-    if (!body) {
-      body = ''
-    } else if (typeof body !== 'string') {
-      body = qs.stringify(body)
-    }
+  // 获取所有的产品类型
+  getAllProtypes(){
+   return axios.get(`${preurl}/system/product/getallproduct`).then(d => d.data)
+  },
+  // 获取所有的年级
+  getAllGrades(){
+   return axios.get(`${preurl}/project/index/getallgrade`).then(d => d.data)
+  },
+  // 获取项目阶段
+  getProstages(){
+    return axios.get(`${preurl}/project/index/getallstage`).then(d => d.data)
+  },
+  //  获取部门列表
+  getDepartList() {
+    return axios.get(`${preurl}/system/department/departmentlist`)
+  },
+  // 获取学年信息 系统学年信息
+  getSysTerms(){
+    return axios.get(`${preurl}/system/term/getallterm`).then(d => d.data)
+  },
+     // 获取匹配到的学校
+  getAssignSchools(){
+   return axios.get(`${preurl}/project/projectinfo/getassignschool`).then(d => d.data)
+  },
+    // 根据name获取操学校 （可以id或者name）
+  getAllSchools(params){
+    var query = qs.stringify(params);
+   return axios.get(`${preurl}/client/school/getschoolbyname?${query}`).then(d => d.data)
+  },
+  // 根据name获取操作者 （可以id或者name）
+  getAssignMembers(params){
+    var query = qs.stringify(params);
+   return axios.get(`${preurl}/client/school/getmemberbyname?${query}`).then(d => d.data)
+  },
+  // 获取学年信息
+  getTerms(){
+   return axios.get(`${preurl}/daily/plan/getTerms`).then(d => d.data)
 
-    return Object.assign({}, this._get, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: body
-    })
-  }
-}
+  },
+  // 获取所有总结计划的接口
+  getplanlist(params) {
+    var query = qs.stringify(params);
+    return axios.get(`${preurl}/daily/plan/list?${query}`)
+  },
 
-const checkStatus = function (response) {
-  if (response.status >= 200 && response.status < 300) {
-    Vue.prototype.$Progress.finish()
-    return response
-  } else {
-    Vue.prototype.$Progress.fail()
-    var error = new Error(response.statusText)
-    error.response = response
-    error.message = '服务开小差儿啦，请稍后再试'
-    throw error
-  }
-}
+  post(_url, obj) {
+    return axios.post(preurl + _url, qs.stringify(obj)).then(d => d.data)
+  },
+  //  get方式获取参数，吧参数遍历传到url中
+  get(_url, params) {
+    var query = qs.stringify(params);
+    return axios.get(`${preurl}${_url}?${query}`).then(d => d.data)
 
-const jsonParser = function (response) {
-  return response.json
-}
+  },
+  //  get方式获取,没有参数的情况
+  _getNoQs(_url) {
+    axios.get(_url).then(d => d.data)
+  },
+  createTopic(params) {
+    return axios.post(`/topics`, params)
+  },
 
-const queryParser = function (url, query) {
-  if (!query) return url
-  let parsedQuery = Object.keys(query).map(key => {
-    let val = typeof query[key] == 'object' ? JSON.stringify(query[key]) : query[key]
-    return (`${key}=${val}`)
-  }).join('&')
 
-  return `${url}?${parsedQuery}`
-}
 
-const checkSuccess = function (parsed) {
-  if(!parsed.error) return parsed
-  else {
-    var error = new Error(parsed.code)
-    if(parsed.error == 3000){
-      Vue.prototype.$confirm('前往登录页面重新登录', '登录超时', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        let signinHref = process.env == 'production'
-          ? '/system/passport/signin'
-          : 'http://oa.kaikela.dev/system/passport/signin'
-        window.location.href = signinHref
-      }).catch(() => {
-      })
-    } else { 
-      var error = new Error(parsed.code)
-      error.message = parsed.message || parsed.msg
-      throw error
-      return 
-    }
-  }
 }

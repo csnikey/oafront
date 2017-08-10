@@ -1,6 +1,5 @@
 const Container = resolve => require(['@/views/Container'], resolve)
 const viewLoader = (name) => (resolve) => require([`@/views/daily/${name}`], resolve)
-const AccountManage = resolve => require(['@/views/system/AccountManage'], resolve)
 
 const scope = 'daily'
 export default [
@@ -41,19 +40,10 @@ export default [
           },
 
         },
-         {
-          path: 'dailyout',
-          name: 'dailyout',
-          component: viewLoader('DailyOutManage'),
-          meta: {
-            title: '出差',
-            level: 2
-          },
 
-        },
           {
-          path: 'adddailyleave',
-          name: 'adddailyleave',
+          path: 'addleave',
+          name: 'addleave',
           component: viewLoader('AddDailyLeave'),
           meta: {
             title: '新增请假',
@@ -61,19 +51,19 @@ export default [
           },
 
         },
-        {
-          path: 'destroydailyleave',
-          name: 'destroydailyleave',
-          component: viewLoader('DestroyDailyLeave'),
-          meta: {
-            title: '销假',
-            level: 2
-          },
+          {
+              path: 'saveleave/:id',
+              name: 'saveleave',
+              component: viewLoader('SaveLeave'),
+              meta: {
+                  title: '修改请假',
+                  level: 2
+              },
 
-        },
+          },
         {
-          path: 'infodailyleave',
-          name: 'infodailyleave',
+          path: 'leavedetail/:id',
+          name: 'leavedetail',
           component: viewLoader('InfoDailyLeave'),
           meta: {
             title: '请假详情',
@@ -158,7 +148,7 @@ export default [
           }
         },
         {
-          path: 'infoplan',
+          path: 'infoplan/:id',
           name: 'infoplan',
           component: viewLoader('InfoPlan'),
           meta: {
@@ -168,7 +158,7 @@ export default [
         {
           path: 'weekplan',
           name: 'weekplan',
-          component: viewLoader('PlanManage'),
+          component: viewLoader('WeekplanManage'),
           meta: {
             title: '周总结计划',
             level: 2
@@ -177,7 +167,7 @@ export default [
         {
           path: 'monthplan',
           name: 'monthplan',
-          component: viewLoader('PlanManage'),
+          component: viewLoader('MonthplanManage'),
           meta: {
             title: '月总结计划',
             level: 2

@@ -5,8 +5,10 @@ import store from '@/store'
 import ElementUI from 'element-ui' // element-ui
 import VueProgressBar from 'vue-progressbar' // progress bar
 import { fetch } from '@/util' // http fetch function
+import { api } from '@/util' // http api function
 import 'normalize.css'
 import '@/styles/layout.scss'
+import '@/styles/kit.scss'
 import 'element-ui/lib/theme-default/index.css'
 
 const __Prototype = Vue.prototype
@@ -42,7 +44,7 @@ router.beforeEach((to, from, next) => {
   	]
   })
   __Prototype.$Progress.start()
-  store.commit('routeNavigate', to.matched)
+  store.commit('routeNavigate', to)
   // continue to next page
   next()
 })
@@ -53,6 +55,8 @@ router.afterEach((to, from) => {
 })
 
 __Prototype.$fetch = fetch
+
+__Prototype.$api = api
 
 /* eslint-disable no-new */
 Vue.config.productionTip = false

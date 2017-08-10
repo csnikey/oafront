@@ -29,7 +29,8 @@ const config = {
   _post (body) {
     if (!body) {
       body = ''
-    } else if (typeof body !== 'string') {
+    } else if (typeof body !== 'string') { 
+      // convert to formData
       body = qs.stringify(body)
     }
 
@@ -57,7 +58,7 @@ const checkStatus = function (response) {
 }
 
 const jsonParser = function (response) {
-  return response.json
+  return response.json()
 }
 
 const queryParser = function (url, query) {
@@ -73,8 +74,7 @@ const queryParser = function (url, query) {
 const checkSuccess = function (parsed) {
   if(!parsed.error) return parsed
   else {
-    var error = new Error(parsed.code)
-    if(parsed.error == 3000){
+    if(parsed.error == 3000) {
       Vue.prototype.$confirm('前往登录页面重新登录', '登录超时', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -90,7 +90,7 @@ const checkSuccess = function (parsed) {
       var error = new Error(parsed.code)
       error.message = parsed.message || parsed.msg
       throw error
-      return 
+      return ;
     }
   }
 }

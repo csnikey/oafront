@@ -11,7 +11,8 @@ const state = {
 }
 
 const mutations = {
-	routeNavigate(state, matched) {
+	routeNavigate(state, to) {
+		let matched = to.matched
 		state.currentSystem = matched[0] ? matched[0].name : ''
 		state.currentMenu = matched[1] ? matched[1].name : ''
 		state.currentSubMenu = matched[2] ? matched[2].name : ''
@@ -34,6 +35,9 @@ const actions = {
 		let menus = await dispatch('getMenus', system)
 		commit('setMenus', menus)
 		commit('setOpeneds', [ menus[1].name ]) // 默认打开第一栏
+	},
+	async getSystems() {
+
 	},
 	// 获取左侧菜单栏数据
   getMenus({ commit }, system) {
