@@ -102,7 +102,7 @@ export default {
     	return type
     },
     createtimeFormat(row, col) {
-    	return Moment(Number(row.create_time)*1000).format("YYYY-MM-DD H:mm:ss")
+      return row.create_time
     },
     // 日志列表
     fetchList(index) {

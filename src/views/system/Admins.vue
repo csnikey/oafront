@@ -113,7 +113,7 @@ export default {
 			})			
 		},
 		lastloginFormat(row) {
-			return `${Moment(Number(row.last_login)).format("YYYY-MM-DD H:mm:ss")} ${row.last_ip}`
+			return `${row.last_login} ${row.last_ip}`
 		},
 		statusFormat(row) {
 			return row.status == '1' ? '正常' : '禁用'

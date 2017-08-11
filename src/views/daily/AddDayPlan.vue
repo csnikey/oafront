@@ -17,7 +17,7 @@
       {{form.nowtime}}
     </el-form-item>
    </el-form>
-<el-form  label-width="80px" :rules="rules" :model="form">
+<el-form  label-width="80px":rules="rules" :model="form">
   <el-form-item label="紧急程度">
     <el-select  placeholder="请选择紧急程度" disabled v-model="form.emery" >
     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">

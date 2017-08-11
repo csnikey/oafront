@@ -6,11 +6,9 @@
       <!-- 左侧菜单栏开始 -->
       <el-menu mode="vertical" theme="dark"
         :default-active="currentSubMenu"
-        :default-openeds='openeds'
         @select="routeChange">
         <!-- 一级菜单栏 -->
         <el-submenu
-
           v-for="menu in menus"
           v-if="!menu.meta.launch"
           :key="menu.name"
@@ -42,6 +40,7 @@
             {{ system.meta.title }}
           </el-menu-item>
         </el-menu>
+        <avatar-pop></avatar-pop>
       </div>
       <!-- 顶部菜单栏END -->
 
@@ -69,8 +68,12 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import AvatarPop from '@/components/AvatarPop'
 export default {
   name: 'app',
+  components: {
+    AvatarPop
+  },
   data() {
     return {
       navMenu: [],

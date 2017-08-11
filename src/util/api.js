@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
-const preurl = '/api'
+const preurl = process.env.NODE_ENV == 'production'
+  ? ''
+  : '/api'
 const oaurl = 'http://oa.kaikela.dev/'
 export default {
   // 获取计划信息
@@ -10,14 +12,6 @@ export default {
   // 获取用户信息
   getUserinfo() {
     return axios.get(`${preurl}/daily/plan/getuserinfo`)
-  },
-  // 获取所有的产品类型
-  getAllProtypes(){
-   return axios.get(`${preurl}/system/product/getallproduct`).then(d => d.data)
-  },
-  // 获取所有的年级
-  getAllGrades(){
-   return axios.get(`${preurl}/project/index/getallgrade`).then(d => d.data)
   },
   // 获取项目阶段
   getProstages(){
@@ -31,12 +25,8 @@ export default {
   getSysTerms(){
     return axios.get(`${preurl}/system/term/getallterm`).then(d => d.data)
   },
-     // 获取匹配到的学校
-  getAssignSchools(){
-   return axios.get(`${preurl}/project/projectinfo/getassignschool`).then(d => d.data)
-  },
     // 根据name获取操学校 （可以id或者name）
-  getAllSchools(params){
+  getAssignSchools(params){
     var query = qs.stringify(params);
    return axios.get(`${preurl}/client/school/getschoolbyname?${query}`).then(d => d.data)
   },

@@ -106,60 +106,6 @@ export default [
               level: 2
             }            
           }                                                
-          // {
-          //   path: 'groups',
-          //   name: 'permission_groups',
-          //   component: Groups,
-          //   meta: {
-          //     title: '管理组列表',
-          //     level: 2
-          //   }
-          // },
-          // {
-          //   path: 'groups_add',
-          //   name: 'permission_groups_add',
-          //   component: GroupsAdd,
-          //   meta: {
-          //     title: '新增管理组',
-          //     level: 2
-          //   }
-          // },
-          // {
-          //   path: 'groups_edit',
-          //   name: 'permission_groups_edit',
-          //   component: GroupsEdit,
-          //   meta: {
-          //     title: '组权限设置',
-          //     level: 2
-          //   }
-          // },                
-          // {
-          //   path: 'rules',
-          //   name: 'permission_rules',
-          //   component: Rules,
-          //   meta: {
-          //     title: '管理组列表',
-          //     level: 2
-          //   }
-          // },
-          // {
-          //   path: 'rules_add',
-          //   name: 'permission_rules_add',
-          //   component: RulesAdd,
-          //   meta: {
-          //     title: '新增权限点',
-          //     level: 2
-          //   }
-          // },
-          // {
-          //   path: 'logs',
-          //   name: 'permission_logs',
-          //   component: Logs,
-          //   meta: {
-          //     title: '全局操作日志',
-          //     level: 2
-          //   }            
-          // }                                        
         ]
       },
       {
@@ -172,16 +118,33 @@ export default [
         },
         children: [      
 
-           {
+          {
             path: 'depart',
-            name: 'depart',
+            name: 'permission_depart',
             component:viewLoader('DepartManage'),
             meta: {
               title: '部门管理',
               level: 2
             }
-
-           },
+          },
+          {
+            path: 'positions',
+            name: 'permission_positions',
+            component:viewLoader('Positions'),
+            meta: {
+              title: '岗位职能',
+              level: 2
+            }
+          },
+          {
+            path: 'employees',
+            name: 'permission_employees',
+            component:viewLoader('Employees'),
+            meta: {
+              title: '员工管理',
+              level: 2
+            }
+          },                     
           //    {
           //   path: 'employ',
           //   name: 'employ',
@@ -263,8 +226,81 @@ export default [
 
           //  },
 
+
+
+
         ]
       }      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

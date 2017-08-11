@@ -45,7 +45,7 @@ const actions = {
       let menus = simpleRoutes.find(route => route.name == system).children
       resolve(menus)
     })
-  }	
+  }
 }
 
 export default {

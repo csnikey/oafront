@@ -62,7 +62,7 @@ export default {
 	},
 	created() {
 		// 过滤下发的rules, 取得该实例中包含的项
-		this.rules.forEach(rule => {
+		this.rules && this.rules.forEach(rule => {
 			let search = this.menu.find(item => {
 				return item.id == rule || item.accesspoint.find(point => point.id == rule)
 			})
