@@ -40,7 +40,7 @@
             {{ system.meta.title }}
           </el-menu-item>
         </el-menu>
-        <avatar-pop></avatar-pop>
+       
       </div>
       <!-- 顶部菜单栏END -->
 
@@ -68,12 +68,8 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
-import AvatarPop from '@/components/AvatarPop'
 export default {
   name: 'app',
-  components: {
-    AvatarPop
-  },
   data() {
     return {
       navMenu: [],
