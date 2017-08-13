@@ -1,8 +1,16 @@
 <template>
-	<div>日常管理 </div>
+	<div>
+<li></li>
+li
+             </div>
+  
 </template>
-<script>
-  export default {
-    
-  }
-</script>
+<script/>
+<style  scoped>
+body{
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    float: left;
+}
+</style>

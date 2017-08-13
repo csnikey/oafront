@@ -1,6 +1,6 @@
 const Container = resolve => require(['@/views/Container'], resolve)
 const viewLoader = (name) => (resolve) => require([`@/views/daily/${name}`], resolve)
-
+const Launch = resolve => require(['@/views/Launch'], resolve)
 const scope = 'daily'
 export default [
   {
@@ -11,7 +11,7 @@ export default [
       title: '日常办公管理'
     },
     children: [{
-      component: viewLoader('DailyManage'),//默认的面板
+      component: Launch,//默认的面板
       path: `${scope}launch`,
       name: `${scope}launch`,
       meta: {
