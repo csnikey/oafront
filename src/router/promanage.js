@@ -1,5 +1,6 @@
 const Container = resolve => require(['@/views/Container'], resolve)
 const viewLoader = (name) => (resolve) => require([`@/views/promanage/${name}`], resolve)
+const Launch = resolve => require(['@/views/Launch'], resolve)
 const scope = 'promanage'
 export default [
   {
@@ -11,7 +12,7 @@ export default [
     },
     children: [
       {
-        component: viewLoader('default'),//默认的面板
+        component: Launch,//默认的面板
         path: `${scope}launch`,
         name: `${scope}launch`,
         meta: {
